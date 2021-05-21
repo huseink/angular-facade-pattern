@@ -1,0 +1,49 @@
+<section class="login p-fixed d-flex text-center bg-primary common-img-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="login-card card-block auth-body mr-auto ml-auto">
+                    <form [formGroup]="signInForm" class="md-float-material" (ngSubmit)="onSignIn()">
+                        <div class="auth-box">
+                            <div class="row m-b-20">
+                                <div class="col-md-12">
+                                    <h3 class="text-left txt-primary">Sign In</h3>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control" placeholder="Username"
+                                    formControlName="userName">
+                                <span class="md-line"></span>
+                            </div>
+                            <div class="input-group mb-4">
+                                <input type="password" class="form-control" placeholder="Password"
+                                    formControlName="password">
+                                <span class="md-line"></span>
+                            </div>
+                            <div class="row m-t-30">
+                                <div class="col-md-12">
+                                    <button type="button"
+                                        class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"
+                                        (click)="onSignIn()">Sign
+                                        in</button>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <button type="button"
+                                        class="btn btn-outline-dark btn-md btn-block waves-effect text-center m-b-20"
+                                        [routerLink]="['/sign-up']">Sign
+                                        Up</button>
+                                </div>
+                            </div>
+                            <div *ngIf="userNotFound" class="col-md-12 mt-3">
+                                <p class="text-danger">User not found!</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

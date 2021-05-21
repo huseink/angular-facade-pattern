@@ -1,0 +1,45 @@
+<section class="login p-fixed d-flex text-center bg-secondary common-img-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="login-card card-block auth-body mr-auto ml-auto">
+                    <form [formGroup]="signUpForm" class="md-float-material">
+                        <div class="auth-box">
+                            <div class="row m-b-20">
+                                <div class="col-md-12">
+                                    <h3 class="text-left txt-primary">Create a new account</h3>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control" placeholder="Username"
+                                    formControlName="userName">
+                                <span class="md-line"></span>
+                            </div>
+                            <div class="input-group mb-4">
+                                <input type="password" class="form-control" placeholder="Password"
+                                    formControlName="password">
+                                <span class="md-line"></span>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <button type="button"
+                                        class="btn btn-success btn-md btn-block waves-effect text-center m-b-20"
+                                        (click)="registerAccount()">Register</button>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <button type="button"
+                                        class="btn btn-outline-dark btn-md btn-block waves-effect text-center m-b-20"
+                                        [routerLink]="['/sign-in']">Go back to sign in</button>
+                                </div>
+                                <div *ngIf="createWasSuccessful" class="col-md-12 mt-3">
+                                    <p class="text-success">User created sucessfully</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,131 @@
+<div class="bg-light" style="height: 100vh!important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-primary" role="alert">
+                    <span style="font-weight: bold;">Your basket contains:</span>
+                    <div *ngFor="let item of basket">
+                        {{item.name}}
+                    </div>
+                    <hr/>
+                    <div>Total price: {{getTotalBasketPrice()}}$</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                    <ngb-panel title="Payment Section">
+                        <ng-template ngbPanelContent>
+                            <form [formGroup]='paymentMethodForm'>
+                                <div class="row">
+                                    <input type="radio" id="creditCard" value="0" class="col-sm-1" name="paymentMethod"
+                                        formControlName="paymentMethod" />
+                                    <label class="col-sm-3" for="creditCard">
+                                        Credit Card
+                                    </label>
+                                    <input *ngIf="paymentMethodForm.controls.paymentMethod.value === '0'" type="text"
+                                        placeholder="Type credit card number" formControlName="creditCard"/>
+                                </div>
+                                <div class="row">
+                                    <input type="radio" id="paypal" value="1" class="col-sm-1" name="paymentMethod"
+                                        formControlName="paymentMethod" />
+                                    <label class="col-sm-3" for="paypal">
+                                        Paypal
+                                    </label>
+                                    <input *ngIf="paymentMethodForm.controls.paymentMethod.value === '1'" type="text"
+                                        placeholder="Type paypal card number" formControlName="creditCard"/>
+                                </div>
+                                <div class="row">
+                                    <input type="radio" id="cash" value="2" class="col-sm-1" name="paymentMethod"
+                                        formControlName="paymentMethod" />
+                                    <label class="col-sm-3" for="cash">
+                                        Cash
+                                    </label>
+                                </div>
+                            </form>
+                        </ng-template>
+                    </ngb-panel>
+                </ngb-accordion>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="Shipping Section">
+                        <ng-template ngbPanelContent>
+                            <form [formGroup]="shippingForm">
+                                <div class="row mt-2">
+                                    <label class="col-sm-3" for="creditCard">
+                                        Full Name:
+                                    </label>
+                                    <input type="text" placeholder="Type your fullname" formControlName="fullName"/>
+                                </div>
+                                <div class="row mt-2">
+                                    <label class="col-sm-3" for="creditCard">
+                                        Country:
+                                    </label>
+                                    <input type="text" placeholder="Type your country" formControlName="country" />
+                                </div>
+                                <div class="row mt-2">
+                                    <label class="col-sm-3" for="creditCard">
+                                        City:
+                                    </label>
+                                    <input type="text" placeholder="Type your city" formControlName="city"/>
+                                </div>
+                                <div class="row mt-2">
+                                    <label class="col-sm-3" for="creditCard">
+                                        Addres:
+                                    </label>
+                                    <input type="text" placeholder="Type your address" formControlName="address"/>
+                                </div>
+                                <div class="row mt-2">
+                                    <label class="col-sm-3" for="creditCard">
+                                        Phone Number:
+                                    </label>
+                                    <input type="text" placeholder="Type your phone number" formControlName="phoneNumber"/>
+                                </div>
+                            </form>
+                        </ng-template>
+                    </ngb-panel>
+                </ngb-accordion>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ngb-accordion #acc="ngbAccordion">
+                    <ngb-panel title="Notify Section">
+                        <ng-template ngbPanelContent>
+                            <form [formGroup]='notifyForm'>
+                                <div class="row">
+                                    <input type="radio" id="email" value="0" class="col-sm-1" name="method"
+                                        formControlName="method" />
+                                    <label class="col-sm-3" for="email">
+                                        Email
+                                    </label>
+                                    <input type="email" *ngIf="notifyForm.controls.method.value === '0'"
+                                        placeholder="Type your email address" formControlName="emailAddress" />
+                                </div>
+                                <div class="row mt-3">
+                                    <input type="radio" id="phone" value="1" class="col-sm-1" name="method"
+                                        formControlName="method" />
+                                    <label class="col-sm-3" for="phone">
+                                        SMS
+                                    </label>
+                                    <input type="email" *ngIf="notifyForm.controls.method.value === '1'"
+                                        placeholder="Type your phone number" formControlName="phoneNumber" />
+                                </div>
+                            </form>
+                        </ng-template>
+                    </ngb-panel>
+                </ngb-accordion>
+                <button class="btn btn-success mt-3 mb-5" (click)="submit()">
+                    Buy Item(s)
+                </button>
+                <button class="btn btn-outline-danger mt-3 mb-5 ml-2" (click)="cancel()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

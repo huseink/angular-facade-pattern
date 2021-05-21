@@ -1,0 +1,37 @@
+<div class="bg-light" style="height: 100vh!important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 padding-0">
+                <div class="row">
+                    <div class="card bg-dark text-light col-sm-4 mr-4 mt-5" *ngFor="let i of items">
+                        <div class="card-body">
+                            <h5 class="card-title">{{i.name}}</h5>
+                            <p class="card-text">Price: {{i.price}}$
+                                <br/>
+                                Quantity: {{ i.quantity }}
+                            </p>
+                            <a class="btn btn-sm btn-primary" (click)="addToBasket(i)">Add</a>
+                            <br/>
+                            <a class="btn btn-sm btn-danger mt-2" (click)="removeFromBasket(i)">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mt-5" style="width: 10em!important;">
+                <div class="row">
+                    <div class="card bg-outline-secondary text-dark col-sm-4" style="border-radius: 10px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{activeUser.username}}'s Basket</h5>
+                            <p class="card-text"> Total Items: {{ basket.length }}
+                                <br/>
+                                Total Price: {{ getTotalBasketPrice() }}$
+                            </p>
+                            <button class="btn btn-sm btn-success" (click)="checkOut()" [disabled]="basket.length === 0">Checkout</button>
+                            <button class="btn btn-sm btn-danger mt-2" (click)="logOut()">Log out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
