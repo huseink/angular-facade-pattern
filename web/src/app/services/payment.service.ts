@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { PaymentInfo } from '../models/paymentInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,8 @@ export class PaymentService {
 
   constructor() { }
 
-  setPaymentMethod(payment: any) {
-    localStorage.setItem('payment', JSON.stringify(payment));
-  }
-
-  getPaymentMethod() {
-    return JSON.parse(localStorage.getItem('payment') || '{}');
-  }
-
-  checkPaymentMethodAvailability(paymentInfo: any) {
-    if (paymentInfo.paymentMethod === 2 || paymentInfo.creditCard === null) {
+  checkPaymentMethodAvailability(paymentInfo: PaymentInfo) {
+    if (paymentInfo.paymentMethod === '2' || paymentInfo.creditCard === null) {
       return false;
     } else {
       this.checkCreditCardInfo(paymentInfo.creditCard);
@@ -29,12 +22,12 @@ export class PaymentService {
     return { number: creditCardNumber, status: 'OK' };
   }
 
-  processPayment(totalPrice: number, paymentInfo: any) {
+  processPayment(totalPrice: number, paymentInfo: PaymentInfo) {
     if (totalPrice < this.priceLimit) {
       return { status: false, message: 'Total price is under our limit' };
     }
     if (this.checkPaymentMethodAvailability(paymentInfo)) {
-      return { status: true, message: 'Payment was sucessful!' };
+      return { status: true, message: `Payment with ${paymentInfo.paymentMethod === '0' ? 'Credit' : 'Paypal'} Card Number - "${paymentInfo.creditCard}" was sucessful!` };
     }
     return { status: false, message: 'Payment failed!' };
   }

@@ -19,10 +19,10 @@ export class CheckoutComponent implements OnInit {
   });
 
   shippingForm = new FormGroup({
-    fullName: new FormControl(null),
-    country: new FormControl(null),
-    city: new FormControl(null),
-    address: new FormControl(null),
+    fullName: new FormControl(null, Validators.required),
+    country: new FormControl(null, Validators.required),
+    city: new FormControl(null, Validators.required),
+    address: new FormControl(null, Validators.required),
     phoneNumber: new FormControl(null),
   });
 
@@ -36,7 +36,9 @@ export class CheckoutComponent implements OnInit {
     private shopFacadeService: ShopFacadeService) { }
 
   ngOnInit(): void {
-    this.basket = this.shopFacadeService.getBasketItems();
+    this.shopFacadeService.getBasketItems().subscribe((basketData) => {
+      this.basket = basketData;
+    });
   }
 
   getTotalBasketPrice() {
@@ -51,7 +53,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   cancel() {
-    localStorage.removeItem('basket');
+    this.shopFacadeService.setBasketItems([]);
     this.router.navigate(['/shop'])
   }
 }

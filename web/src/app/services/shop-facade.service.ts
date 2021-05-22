@@ -6,6 +6,9 @@ import { PaymentService } from './payment.service';
 import { ShippingService } from './shipping.service';
 import { UserService } from './user.service';
 import Swal from 'sweetalert2'
+import { PaymentInfo } from '../models/paymentInfo';
+import { ShippingInfo } from '../models/shippingInfo';
+import { NotifyInfo } from '../models/notifyInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,7 @@ export class ShopFacadeService {
     private notifyService: NotifyService,
   ) { }
 
-  buyItems(basket: Item[], paymentInfo: any, shippingInfo: any, notificationInfo: any) {
+  buyItems(basket: Item[], paymentInfo: PaymentInfo, shippingInfo: ShippingInfo, notificationInfo: NotifyInfo) {
     const totalPrice = this.getTotalBasketPrice(basket);
     const paymentResult = this.paymentService.processPayment(totalPrice, paymentInfo);
     const shippingResult = this.shippingService.processShipping(shippingInfo);
@@ -27,7 +30,11 @@ export class ShopFacadeService {
     this.showResults(paymentResult, shippingResult, notificationResult);
   }
 
-  showResults(paymentResult: { status: any; message: any; }, shippingResult: { status: any; message: any; }, notificationResult: { status: any; message: any; }) {
+  showResults(
+    paymentResult: { status: boolean; message: string; },
+    shippingResult: { status: boolean; message: string; },
+    notificationResult: { status: boolean; message: string; }
+  ) {
     if (paymentResult.status === true && shippingResult.status === true && notificationResult.status === true) {
       const loggedInUser = this.userService.getLoggedInUser();
       const swalText = `
@@ -55,7 +62,7 @@ export class ShopFacadeService {
         icon: 'success',
       })
     } else {
-      Swal.fire('Checkout Error', 'There was an error processing your checkout info', 'error');
+      Swal.fire('Checkout Error', 'There was an error processing your checkout info, please check if you entered correct information', 'error');
     }
   }
 
@@ -64,7 +71,8 @@ export class ShopFacadeService {
   }
 
   getBasketItems() {
-    return this.basketService.getBasketItems();
+    const user = this.getLoggedInUser();
+    return this.basketService.getBasketItems(user.username);
   }
 
   getLoggedInUser() {
@@ -76,7 +84,8 @@ export class ShopFacadeService {
   }
 
   setBasketItems(basket: Item[]) {
-    this.basketService.setBasketItems(basket);
+    const user = this.getLoggedInUser();
+    this.basketService.setBasketItems(basket, user.username).subscribe();
   }
 
 }
