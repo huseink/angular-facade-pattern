@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
+import { NotifyInfo } from '../models/notifyInfo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotifyService {
-  notificationInfo: any = null;
+  notificationInfo: NotifyInfo = {
+    method: '',
+    emailAddress: '',
+    phoneNumber: '',
+  };
   constructor() { }
 
-  setNotificationInfo(notificationInfo: any) {
+  setNotificationInfo(notificationInfo: NotifyInfo) {
     this.notificationInfo = notificationInfo;
   }
 
-  processNotifications(notificationInfo: any) {
+  processNotifications(notificationInfo: NotifyInfo) {
     this.setNotificationInfo(notificationInfo);
     if (this.notificationInfo.emailAddress !== null) {
       return this.sendEmail(this.notificationInfo.emailAddress);

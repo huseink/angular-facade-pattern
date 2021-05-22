@@ -16,11 +16,11 @@ export class UserService extends BaseService {
   }
 
   public getLoggedInUser(): User{
-    let user = new User('','');
+    let user = new User('','', []);
     const activeUserInfo = localStorage.getItem('activeUser');
     if(activeUserInfo) {
       const userInfo = JSON.parse(activeUserInfo)
-      user = new User(userInfo.username, userInfo.password);
+      user = new User(userInfo.username, userInfo.password, []);
     }
     return user;
   }

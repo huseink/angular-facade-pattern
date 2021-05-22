@@ -24,7 +24,7 @@ export class SignUpComponent implements OnInit {
   registerAccount() {
     const username = this.signUpForm.controls.userName.value;
     const password = this.signUpForm.controls.password.value;
-    const user = new User(username, password)
+    const user = new User(username, password, [])
     this.userService.createUser(user).subscribe((data) => {
       if(data.includes('added')) {
         this.createWasSuccessful = true;

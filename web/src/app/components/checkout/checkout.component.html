@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-12">
                 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-                    <ngb-panel title="Payment Section">
+                    <ngb-panel title="Payment Section - Required">
                         <ng-template ngbPanelContent>
                             <form [formGroup]='paymentMethodForm'>
                                 <div class="row">
@@ -25,7 +25,7 @@
                                         Credit Card
                                     </label>
                                     <input *ngIf="paymentMethodForm.controls.paymentMethod.value === '0'" type="text"
-                                        placeholder="Type credit card number" formControlName="creditCard"/>
+                                        placeholder="Type credit card number" formControlName="creditCard" class="col-sm-5"/>
                                 </div>
                                 <div class="row">
                                     <input type="radio" id="paypal" value="1" class="col-sm-1" name="paymentMethod"
@@ -34,13 +34,13 @@
                                         Paypal
                                     </label>
                                     <input *ngIf="paymentMethodForm.controls.paymentMethod.value === '1'" type="text"
-                                        placeholder="Type paypal card number" formControlName="creditCard"/>
+                                        placeholder="Type paypal card number" formControlName="creditCard" class="col-sm-5"/>
                                 </div>
                                 <div class="row">
                                     <input type="radio" id="cash" value="2" class="col-sm-1" name="paymentMethod"
                                         formControlName="paymentMethod" />
                                     <label class="col-sm-3" for="cash">
-                                        Cash
+                                        Cash <span style="opacity: 0.5; font-style: italic; font-size: 12px;">(Currently not available)</span>
                                     </label>
                                 </div>
                             </form>
@@ -52,38 +52,41 @@
         <div class="row">
             <div class="col-12">
                 <ngb-accordion #acc="ngbAccordion">
-                    <ngb-panel title="Shipping Section">
+                    <ngb-panel title="Shipping Section - Required">
                         <ng-template ngbPanelContent>
                             <form [formGroup]="shippingForm">
                                 <div class="row mt-2">
                                     <label class="col-sm-3" for="creditCard">
                                         Full Name:
                                     </label>
-                                    <input type="text" placeholder="Type your fullname" formControlName="fullName"/>
+                                    <input type="text" placeholder="Type your fullname" formControlName="fullName" class="col-sm-5"/>
                                 </div>
                                 <div class="row mt-2">
                                     <label class="col-sm-3" for="creditCard">
-                                        Country:
+                                        Country: <span style="opacity: 0.7; font-style: italic;
+                                        font-size: 12px;">Required</span>
                                     </label>
-                                    <input type="text" placeholder="Type your country" formControlName="country" />
+                                    <input type="text" placeholder="We only ship to Turkey for now!" formControlName="country"  class="col-sm-5"/>
                                 </div>
                                 <div class="row mt-2">
                                     <label class="col-sm-3" for="creditCard">
-                                        City:
+                                        City: <span style="opacity: 0.7; font-style: italic;
+                                        font-size: 12px;">Required</span>
                                     </label>
-                                    <input type="text" placeholder="Type your city" formControlName="city"/>
+                                    <input type="text" placeholder="Type your city" formControlName="city" class="col-sm-5"/>
                                 </div>
                                 <div class="row mt-2">
                                     <label class="col-sm-3" for="creditCard">
-                                        Addres:
+                                        Addres: <span style="opacity: 0.7; font-style: italic;
+                                        font-size: 12px;">Required</span>
                                     </label>
-                                    <input type="text" placeholder="Type your address" formControlName="address"/>
+                                    <input type="text" placeholder="Type your address" formControlName="address" class="col-sm-5"/>
                                 </div>
                                 <div class="row mt-2">
                                     <label class="col-sm-3" for="creditCard">
                                         Phone Number:
                                     </label>
-                                    <input type="text" placeholder="Type your phone number" formControlName="phoneNumber"/>
+                                    <input type="text" placeholder="Type your phone number" formControlName="phoneNumber" class="col-sm-5"/>
                                 </div>
                             </form>
                         </ng-template>
@@ -94,7 +97,7 @@
         <div class="row">
             <div class="col-12">
                 <ngb-accordion #acc="ngbAccordion">
-                    <ngb-panel title="Notify Section">
+                    <ngb-panel title="Notify Section - Required">
                         <ng-template ngbPanelContent>
                             <form [formGroup]='notifyForm'>
                                 <div class="row">
@@ -104,7 +107,7 @@
                                         Email
                                     </label>
                                     <input type="email" *ngIf="notifyForm.controls.method.value === '0'"
-                                        placeholder="Type your email address" formControlName="emailAddress" />
+                                        placeholder="Type your email address" formControlName="emailAddress" class="col-sm-5"/>
                                 </div>
                                 <div class="row mt-3">
                                     <input type="radio" id="phone" value="1" class="col-sm-1" name="method"
@@ -113,13 +116,13 @@
                                         SMS
                                     </label>
                                     <input type="email" *ngIf="notifyForm.controls.method.value === '1'"
-                                        placeholder="Type your phone number" formControlName="phoneNumber" />
+                                        placeholder="Type your phone number" formControlName="phoneNumber" class="col-sm-5"/>
                                 </div>
                             </form>
                         </ng-template>
                     </ngb-panel>
                 </ngb-accordion>
-                <button class="btn btn-success mt-3 mb-5" (click)="submit()">
+                <button class="btn btn-success mt-3 mb-5" (click)="submit()" >
                     Buy Item(s)
                 </button>
                 <button class="btn btn-outline-danger mt-3 mb-5 ml-2" (click)="cancel()">

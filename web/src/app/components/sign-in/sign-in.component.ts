@@ -25,7 +25,7 @@ export class SignInComponent implements OnInit {
   onSignIn() {
     const username = this.signInForm.controls.userName.value;
     const password = this.signInForm.controls.password.value;
-    const user = new User(username, password)
+    const user = new User(username, password, [])
     this.userService.signIn(user).subscribe((data) => {
       if(!data.username) {
         this.userNotFound = true;

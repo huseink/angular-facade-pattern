@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Item } from 'src/app/models/item';
 import { User } from 'src/app/models/user';
-import { BasketService } from 'src/app/services/basket.service';
-import { PaymentService } from 'src/app/services/payment.service';
 import { ShopFacadeService } from 'src/app/services/shop-facade.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-shop',
